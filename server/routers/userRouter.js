@@ -1,11 +1,9 @@
-const express = require("express")
+const express = require("express");
+const userRouter = express.Router();
 
-const userRouter = express.Router();  // для адресов с "/users"
+const { getUser, test } = require("../controllers/userController");
 
-userRouter.get("/", function (request, response) {
-    response.send("User");
-});
+userRouter.get("/", getUser);
+userRouter.get("/test", test);
 
-module.exports = userRouter
-
-// сопоcтавляем роутер с конечной точкой "/users"
+module.exports = userRouter;

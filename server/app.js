@@ -1,26 +1,22 @@
 const express = require("express");
-const app = express()
-const rootRouter = require('./routers/rootRouter')
-const PORT = process.env.PORT ?? 5000
+const app = express();
+const rootRouter = require("./routers/rootRouter");
+const PORT = process.env.PORT ?? 5000;
 
-app.use(express.json())
-
-
+app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 
 const start = () => {
-    try {
-        app.use("/api", rootRouter)
-        // app.get("/api", (req, res) => {
-        //     return res.json("main")
-        // })
-        // app.get("/api/test", (req, res) => {
-        //     return res.json("test")
-        // })
+  try {
+    app.use("/api", rootRouter);
+    app.listen(PORT, () => console.log(`server runned on port:${PORT}`));
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-        app.listen(PORT, () => console.log(`server runned on port:${PORT}`))
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-start()
+start();

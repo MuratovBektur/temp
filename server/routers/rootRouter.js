@@ -1,12 +1,12 @@
-const express = require("express")
-const userRouter = require("./userRouter")
+const express = require("express");
+const userRouter = require("./userRouter");
 
-const rootReducer = express.Router();
+const rootRouter = express.Router();
 
-rootReducer.use("/user", userRouter)
+rootRouter.use("/user", userRouter);
 
-rootReducer.get("/", function (request, response) {
-    response.send("Api");
+rootRouter.get("/", function (request, response) {
+  response.send("Api");
 });
 
-module.exports = rootReducer
+module.exports = rootRouter;
